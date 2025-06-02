@@ -1,0 +1,22 @@
+{
+  "action": {
+    "add": "Qo'shish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "close": "Yopish",
+    "yes": "Ha",
+    "no": "Yo‘q",
+    "search": "Qidirish",
+    "reset": "Qayta tiklash",
+    "download": "Yuklash",
+    "upload": "Yuklash",
+    "back": "Orqaga qaytish",
+    "confirm": "Tasdiqlash",
+    "previous": "Oldingi",
+    "apply": "ARIZA TOPSHIRISH",
+    "next": "Davom ettirish",
+    "startTest": "Testni boshlash"
+  }
+}

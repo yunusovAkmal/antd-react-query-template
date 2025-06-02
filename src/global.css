@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/SpaceGrotesk-Regular.ttf') format('truetype');
+}
+
+@theme {
+  --color-primary: #002e5d;
+}
+
+
+.ant-upload.ant-upload-select {
+  width: 100%;
+}
