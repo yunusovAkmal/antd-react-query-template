@@ -33,3 +33,19 @@ export function clearPhoneMask(value: string = '', hidePlus = false) {
   const digits = value.replace(/\D/g, '') // Remove non-digit characters
   return hidePlus ? digits : `+${digits}`
 }
+
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('ru-RU')
+}
+
+export const formatDateAndTime = (date?: string | null) => {
+  if (!date) return ''
+
+  return new Date(date).toLocaleDateString('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}

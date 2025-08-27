@@ -1,5 +1,7 @@
-import type { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
 import axios from 'axios'
+
+import type { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
+
 import { HttpInterceptor } from './HttpInterceptor'
 
 export class AxiosClient {

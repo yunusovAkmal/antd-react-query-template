@@ -1,5 +1,4 @@
 import InputMask from 'react-input-mask'
-
 import { Input, type InputProps } from 'antd'
 import FormItem, { type FormItemProps } from 'antd/es/form/FormItem'
 

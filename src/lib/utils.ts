@@ -24,3 +24,13 @@ export function downloadFile(url: string, filename: string) {
 export function checkIsValidValues(obj: Record<string, unknown>) {
   return Object.values(obj).every(Boolean)
 }
+
+type UserData = {
+  first_name: string
+  last_name: string
+  middle_name: string
+}
+
+export const getFullName = (user: UserData) => {
+  return `${user.last_name} ${user.first_name} ${user.middle_name}`
+}

@@ -1,8 +1,9 @@
-import type { AxiosResponse } from 'axios'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { WithId } from '~/types'
+
 import { apiClient } from '~/api/http'
 import { useMutation, useQuery, type MutationOptions, type QueryOptions } from '~/api/query'
 import { errorHandler } from '~/lib/handler'
-import type { WithId } from '~/types'
 
 export type QueryGetOption<R> = Partial<QueryOptions<R>>
 
@@ -34,7 +35,7 @@ export function useCreate<R, B>(path: string, options: MutationOptions<B, R>) {
 
 export function useUpdate<R, B>(path: string, options: MutationOptions<WithId<B>, R>) {
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ data, id }: WithId<B>) => apiClient.put<R, B>(`${path}/${id}`, data),
+    mutationFn: ({ data, id }: WithId<B>) => apiClient.put<R, B>(`${path}/${id}/`, data),
     onError: errorHandler,
     ...options
   })
@@ -45,9 +46,30 @@ export function useUpdate<R, B>(path: string, options: MutationOptions<WithId<B>
   }
 }
 
-export function useCustomUpdate<R, B>(path: string, options: MutationOptions<B, R>) {
+export function usePartialUpdate<R, B>(
+  path: string,
+  options: MutationOptions<WithId<B>, R>,
+  config?: AxiosRequestConfig<B>
+) {
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: B) => apiClient.put<R, B>(path, data),
+    mutationFn: ({ data, id }: WithId<B>) => apiClient.patch<R, B>(`${path}/${id}/`, data, config),
+    onError: errorHandler,
+    ...options
+  })
+
+  return {
+    update: mutate,
+    isUpdating: isPending
+  }
+}
+
+export function useCustomUpdate<R, B>(
+  path: string,
+  options: MutationOptions<B, R>,
+  config?: AxiosRequestConfig<B>
+) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: B) => apiClient.put<R, B>(path, data, config),
     onError: errorHandler,
     ...options
   })
@@ -60,7 +82,7 @@ export function useCustomUpdate<R, B>(path: string, options: MutationOptions<B, 
 
 export function useDelete<R, B>(path: string, options: MutationOptions<B, R>) {
   const { mutate, isPending } = useMutation({
-    mutationFn: (id: B) => apiClient.delete<R>(`${path}/${id}`),
+    mutationFn: (id: B) => apiClient.delete<R>(`${path}/${id}/`),
     onError: errorHandler,
     ...options
   })
@@ -69,4 +91,47 @@ export function useDelete<R, B>(path: string, options: MutationOptions<B, R>) {
     remove: mutate,
     isRemoving: isPending
   }
+}
+
+export function useGetMutation<R, P = void>(path: string, options: MutationOptions<P, R> = {}) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (params: P) => apiClient.get<R>(path, { params }),
+    onError: errorHandler,
+    ...options
+  })
+
+  return {
+    mutate,
+    isLoading: isPending
+  }
+}
+
+export function useExcelDownload<Query>(
+  path: string,
+  options: MutationOptions<Query, Blob> = {},
+  filename: string = 'file.xlsx'
+) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (params: Query) => apiClient.get<Blob>(path, { params, responseType: 'blob' }),
+    onError: errorHandler,
+    onSuccess(data) {
+      download(data, filename)
+    },
+    ...options
+  })
+
+  return {
+    download: mutate,
+    isDownloading: isPending
+  }
+}
+
+const download = (data: Blob, filename: string) => {
+  const url = window.URL.createObjectURL(data)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  a.remove()
+  window.URL.revokeObjectURL(url)
 }

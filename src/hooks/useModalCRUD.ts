@@ -1,6 +1,5 @@
 import { useState } from 'react'
-
-import { FormInstance, useForm } from 'antd/es/form/Form'
+import { type FormInstance, useForm } from 'antd/es/form/Form'
 
 type ModalMode = 'create' | 'update'
 

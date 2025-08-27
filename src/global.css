@@ -1,18 +1,56 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
-  font-family: 'SpaceGrotesk';
+  font-family: 'Inter';
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url('/SpaceGrotesk-Regular.ttf') format('truetype');
+  src: url('/Inter.ttf') format('truetype');
 }
 
 @theme {
   --color-primary: #002e5d;
+  --color-dark-gray: #1c1e23;
+  --color-medium-gray: #27292e;
+  --color-layout: #0f1011;
+  --color-secondary: #6a6e77;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
 
 .ant-upload.ant-upload-select {
   width: 100%;
+}
+
+@keyframes spinner {
+  0%,
+  100% {
+    transform: rotate(var(--rotation)) translate(0, -150%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(var(--rotation)) translate(0, -150%) scale(0.5);
+    opacity: 0.5;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252930;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

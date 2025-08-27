@@ -1,5 +1,4 @@
 import { PatternFormat } from 'react-number-format'
-
 import { Input, type FormItemProps, type InputProps } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
 
@@ -10,10 +9,10 @@ const CustomInput = (props: InputProps) => {
 const PatternInput = (props: Omit<InputProps, 'type' | 'value' | 'defaultValue'>) => {
   return (
     <PatternFormat<InputProps>
+      customInput={CustomInput}
       format="+998 (##) ### ## ##"
       mask="_"
       type="tel"
-      customInput={CustomInput}
       {...props}
     />
   )

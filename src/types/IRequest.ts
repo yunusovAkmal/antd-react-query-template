@@ -1,55 +1,19 @@
-export interface PaginationOptions {
+export type PaginationOptions = {
   page: number
   size: number
 }
 
-interface BasePagination {
-  pageable: {
-    sort: {
-      empty: boolean
-      sorted: boolean
-      unsorted: boolean
-    }
-    offset: number
-    pageNumber: number
-    pageSize: number
-    paged: boolean
-    unpaged: boolean
-  }
-  last: boolean
-  totalPages: number
-  totalElements: number
-  size: number
-  number: number
-  sort: {
-    empty: boolean
-    sorted: boolean
-    unsorted: boolean
-  }
-  first: boolean
-  numberOfElements: number
-  empty: boolean
+export interface PaginationQuery {
+  offset?: number
+  limit?: number
 }
 
-export interface Pagination<T> extends BasePagination {
-  content: T
+export interface Pagination<T> {
+  count: number
+  results: T
 }
 
-export type FileType = {
-  id?: number
-  url: string
-  isMain?: boolean
-  fileName: string
-}
-
-export interface IMessage<T = null> {
-  message: string
-  errorMessage: string
-  status: boolean
-  object: T
-}
-
-export type QueryParam = string | null | undefined | number
+export type QueryParam = string | null | undefined | number | boolean
 
 export type WithId<T> = {
   data: T
@@ -57,7 +21,7 @@ export type WithId<T> = {
 }
 
 export type BaseError = {
-  message: string
+  detail: string
 }
 
 export type BaseResponse<T = unknown> = {

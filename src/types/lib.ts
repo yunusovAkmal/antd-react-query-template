@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react'
 
-export type Option<T = string | number | null> = {
+export type SelectOption<T = string | number | null> = {
   label: string
   value: T
 }

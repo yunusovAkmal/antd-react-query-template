@@ -1,9 +1,19 @@
+import { ServiceSlugEnum } from '~/types'
+
 export default {
   // public Routes
-  home: '/',
-  serverError: '/server-error',
+  oneIdError: '/error', // one id error redirect url for error
+  oneIdSuccess: '/welcome', // one id success redirect url for success
   notFound: '/not-found',
-  register: '/auth/register',
   login: '/auth/login',
-  forgotPassword: '/auth/forgot-password'
+
+  home: '/',
+  admissionLyceum: `/${ServiceSlugEnum.ADMISSION_LYCEUM}`,
+  admissionVocational: `/${ServiceSlugEnum.ADMISSION_VOCATIONAL_SCHOOL}`,
+  admissionMaster: `/${ServiceSlugEnum.ADMISSION_MASTER}`,
+  admissionInterview: `/${ServiceSlugEnum.ADMISSION_INTERVIEW}`,
+  admissionSecondary: `/${ServiceSlugEnum.ADMISSION_SECONDARY}`,
+  admissionTechnical: `/${ServiceSlugEnum.ADMISSION_TECHNICAL_SCHOOL}`
+
+  // menu
 } as const

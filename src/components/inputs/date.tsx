@@ -9,6 +9,7 @@ export type DateInputProps = {
   value?: DatePickerProps['value']
   dateFormat?: string
   serverDateFormat?: string
+  isISOFormat?: boolean
 } & DatePickerProps
 
 const dateFormatter = (
@@ -22,24 +23,41 @@ const dateFormatter = (
   return date.isValid() ? date : null
 }
 
+const getDateValue = ({
+  value,
+  serverDateFormat,
+  isISOFormat
+}: Pick<DateInputProps, 'value' | 'serverDateFormat' | 'isISOFormat'>) => {
+  if (!value) return null
+
+  if (isISOFormat) {
+    return dayjs(value)
+  }
+
+  return dateFormatter(value, serverDateFormat)
+}
+
 export function DateInput({
   value,
   onChange,
   dateFormat = DEFAULT_DATE_FORMAT,
   serverDateFormat = SERVER_DATE_FORMAT,
+  isISOFormat = false,
   ...props
 }: DateInputProps) {
   return (
     <DatePicker
       allowClear
-      style={{ width: '100%' }}
       format={{
         format: dateFormat,
         type: 'mask'
       }}
       placeholder={dateFormat}
-      value={dateFormatter(value, dateFormat)}
-      onChange={(_date: dayjs.Dayjs, dateString: string | string[]) => onChange!(dateString)}
+      style={{ width: '100%' }}
+      value={getDateValue({ value, serverDateFormat, isISOFormat })}
+      onChange={(date: dayjs.Dayjs, dateString: string | string[]) =>
+        onChange!(isISOFormat ? date.toISOString() : dateString)
+      }
       {...props}
     />
   )

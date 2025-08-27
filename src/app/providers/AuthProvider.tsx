@@ -1,18 +1,35 @@
 import { useEffect, type PropsWithChildren } from 'react'
 
+import { getAdminServices, storageService } from '~/api'
 import { useAuthStore } from '~/app/store/authStore'
 import { GlobalSpinner } from '~/components/loaders/GlobalSpinner'
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const state = useAuthStore((store) => store.state)
-  const setUser = useAuthStore((store) => store.setUser)
+  const updateState = useAuthStore((store) => store.updateState)
 
   useEffect(() => {
-    const user = localStorage.getItem('user')
-    if (user) {
-      setUser(JSON.parse(user))
-    }
-  }, [setUser])
+    const token = storageService.getAccessToken()
+
+    if (!token) return
+
+    getAdminServices()
+      .then((services) => {
+        const user = services[0].admin
+        updateState({
+          user,
+          services,
+          isAuthenticated: true,
+          state: 'finished'
+        })
+      })
+      .catch(() => {
+        updateState({
+          isAuthenticated: false,
+          state: 'finished'
+        })
+      })
+  }, [updateState])
 
   if (state === 'loading') {
     return <GlobalSpinner />

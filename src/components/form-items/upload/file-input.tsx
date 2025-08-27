@@ -1,10 +1,10 @@
 import { Button, type GetProp, Upload, type UploadProps } from 'antd'
 import { UploadIcon } from 'lucide-react'
-
 import { toast } from 'sonner'
-import { customRequest } from './customRequest'
-import { generateUploadFileList } from './helper'
+
 import type { UploadFileList, UploadFileResponse } from './types'
+
+import { generateUploadFileList } from './helper'
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]
 
@@ -17,7 +17,7 @@ const beforeUpload = (file: FileType, maxFileSizeInMB: number) => {
     return Upload.LIST_IGNORE
   }
 
-  return true
+  return false
 }
 
 const defaultContent = (
@@ -45,7 +45,7 @@ export const FileInput = ({
     <Upload
       beforeUpload={(file) => beforeUpload(file, maxFileSizeInMB)}
       className="w-full"
-      customRequest={customRequest}
+      // customRequest={customRequest}
       fileList={files}
       listType="picture"
       onPreview={() => {}}

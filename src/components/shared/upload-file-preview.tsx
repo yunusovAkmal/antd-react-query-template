@@ -1,4 +1,4 @@
-import { Button } from '@heroui/button'
+import { Button } from 'antd'
 import { PaperclipIcon, Trash2Icon } from 'lucide-react'
 
 export type UploadFileType = string | File
@@ -34,14 +34,7 @@ export const UploadFilePreview = ({ file, onRemove }: UploadImagePreviewProps) =
         </div>
       </div>
 
-      <Button
-        isIconOnly
-        className="border"
-        color="danger"
-        type="button"
-        variant="solid"
-        onPress={onRemove}
-      >
+      <Button danger onClick={onRemove}>
         <Trash2Icon />
       </Button>
     </div>

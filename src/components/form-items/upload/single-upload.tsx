@@ -2,20 +2,20 @@ import { Form, type FormItemProps } from 'antd'
 
 import { FileInput, type FileInputProps } from '~/components/form-items/upload/file-input'
 
-export interface SingleFileUploadFormItemProps extends FormItemProps {
+export interface SingleFileUploadFormItemProps<T = unknown> extends FormItemProps<T> {
   inputProps?: Partial<FileInputProps>
   maxFileSizeInMB: FileInputProps['maxFileSizeInMB']
   accept: FileInputProps['accept']
 }
 
-export function SingleFileUploadFormItem({
+export function SingleFileUploadFormItem<T = unknown>({
   required = false,
   accept,
   rules = [],
   inputProps = {},
   maxFileSizeInMB,
   ...props
-}: SingleFileUploadFormItemProps) {
+}: SingleFileUploadFormItemProps<T>) {
   return (
     <Form.Item
       getValueFromEvent={({ fileList }) => fileList}
@@ -33,5 +33,3 @@ export function SingleFileUploadFormItem({
     </Form.Item>
   )
 }
-
-SingleFileUploadFormItem.displayName = 'SingleFileUploadFormItem'

@@ -1,1 +1,2 @@
-# antd-react-query-template
+# adabiyot-edu
+adabiyot-edu

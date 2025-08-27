@@ -1,6 +1,5 @@
-import { Button } from '@heroui/button'
+import { Button, Image } from 'antd'
 import { TrashIcon } from 'lucide-react'
-import Image from 'next/image'
 
 export type UploadFileType = string | File
 
@@ -33,14 +32,7 @@ export const UploadImagePreview = ({ file, onRemove }: UploadImagePreviewProps) 
         }}
       />
 
-      <Button
-        isIconOnly
-        className="absolute right-2 top-2 border"
-        color="danger"
-        type="button"
-        variant="solid"
-        onPress={onRemove}
-      >
+      <Button danger className="absolute top-2 right-2 border" onClick={onRemove}>
         <TrashIcon />
       </Button>
     </div>

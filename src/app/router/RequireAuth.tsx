@@ -8,7 +8,7 @@ export default function RequireAuth({ children }: { children: React.ReactNode })
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
   if (!isAuthenticated) {
-    return <Navigate to={`${paths.login}?redirect=${pathname}`} replace />
+    return <Navigate replace to={`${paths.login}?redirect=${pathname}`} />
   }
 
   return children

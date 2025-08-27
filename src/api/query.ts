@@ -1,13 +1,14 @@
+import {
+  useQuery as useReactQuery,
+  useMutation as useReactQueryMutation
+} from '@tanstack/react-query'
+
 import type {
   QueryKey,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
   UseQueryResult
-} from '@tanstack/react-query'
-import {
-  useQuery as useReactQuery,
-  useMutation as useReactQueryMutation
 } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import type { BaseError, BaseResponse } from '~/types'

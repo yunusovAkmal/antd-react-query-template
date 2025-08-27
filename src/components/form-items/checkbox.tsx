@@ -1,19 +1,20 @@
-import { Checkbox } from 'antd'
+import { Checkbox, type CheckboxProps } from 'antd'
 import FormItem, { type FormItemProps } from 'antd/es/form/FormItem'
 
-export interface CheckboxFormItemProps extends FormItemProps {}
+export interface CheckboxFormItemProps<T = unknown> extends FormItemProps<T> {
+  inputProps?: CheckboxProps
+}
 
-export function CheckboxFormItem({
+export function CheckboxFormItem<T = unknown>({
   label,
   required = false,
   rules = [],
+  inputProps = {},
   ...props
-}: CheckboxFormItemProps) {
+}: CheckboxFormItemProps<T>) {
   return (
-    <FormItem valuePropName="checked" rules={[{ required }, ...rules]} {...props}>
-      <Checkbox>{label}</Checkbox>
+    <FormItem rules={[{ required }, ...rules]} valuePropName="checked" {...props}>
+      <Checkbox {...inputProps}>{label}</Checkbox>
     </FormItem>
   )
 }
-
-CheckboxFormItem.displayName = 'CheckboxFormItem'

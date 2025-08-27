@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import { ArrowLeft, HomeIcon } from 'lucide-react'
 
-const NotFound = () => {
+export default function NotFoundPage() {
   return (
     <div className="to-university-blue-50 flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-white p-4">
       <div className="w-full max-w-md">
@@ -13,7 +13,7 @@ const NotFound = () => {
             </div>
           </div>
 
-          <h1 className="text-university-secondary-700 text-3xl font-bold">Sahifa</h1>
+          <h1 className="text-university-secondary-700 text-3xl font-bold">Sahifa topilmadi</h1>
 
           <p className="mb-6 text-gray-600">
             The page you're looking for doesn't exist or has been moved.
@@ -42,5 +42,3 @@ const NotFound = () => {
     </div>
   )
 }
-
-export default NotFound

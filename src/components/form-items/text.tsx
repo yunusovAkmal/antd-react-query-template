@@ -1,20 +1,23 @@
 import { type FormItemProps, Input, type InputProps } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
+import { useTranslation } from 'react-i18next'
 
-export interface TextFormItemProps extends FormItemProps {
+export interface TextFormItemProps<T = unknown> extends FormItemProps<T> {
   inputProps?: InputProps
 }
 
-export function TextFormItem({
+export function TextFormItem<T = unknown>({
   required,
   rules = [],
   inputProps = {},
+  label,
   ...props
-}: TextFormItemProps) {
+}: TextFormItemProps<T>) {
+  const { t } = useTranslation()
+
   return (
-    <FormItem rules={[{ required }, ...rules]} {...props}>
-      <Input allowClear {...inputProps} />
+    <FormItem label={label} rules={[{ required }, ...rules]} {...props}>
+      <Input allowClear placeholder={t('placeholder', { label })} {...inputProps} />
     </FormItem>
   )
 }
-TextFormItem.displayName = 'TextFormItem'

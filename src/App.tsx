@@ -1,4 +1,5 @@
 import { Toaster } from 'sonner'
+
 import AntdConfigProvider from '~/app/providers/AntdConfigProvider'
 import { AuthProvider } from '~/app/providers/AuthProvider'
 import ReactQueryProvider from '~/app/providers/ReactQueryProvider'
@@ -6,15 +7,15 @@ import { RouterProvider } from '~/app/providers/RouterProvider'
 
 const App = () => {
   return (
-    <ReactQueryProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <ReactQueryProvider>
         <AntdConfigProvider>
-          <Toaster expand={true} richColors position="top-center" closeButton duration={4000} />
-
           <RouterProvider />
+
+          <Toaster closeButton richColors duration={4000} expand={true} position="top-center" />
         </AntdConfigProvider>
-      </AuthProvider>
-    </ReactQueryProvider>
+      </ReactQueryProvider>
+    </AuthProvider>
   )
 }
 

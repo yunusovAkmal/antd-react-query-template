@@ -1,8 +1,9 @@
 import { type UploadProps } from 'antd'
 
 import type { AxiosRequestConfig } from 'axios'
-import { apiClient } from '~/api'
 import type { UploadFileResponse } from '~/components/form-items/upload/types'
+
+import { apiClient } from '~/api'
 
 export const uploadFile = (
   file: File,
@@ -17,7 +18,7 @@ export const uploadFile = (
     }
   )
 }
- 
+
 export const customRequest: UploadProps['customRequest'] = ({
   file,
   onError,
